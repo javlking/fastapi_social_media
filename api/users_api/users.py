@@ -1,4 +1,4 @@
-from fastapi import Request
+from fastapi import Request, Body
 
 from pydantic import BaseModel
 from typing import List, Dict
@@ -62,7 +62,7 @@ async def get_user(user_id: int):
 
 # Вход в аккаунт
 @app.post('/api/login')
-async def login_user(email: str, password: str):
+async def login_user(email: str = Body(), password: str = Body()):
     # валидация переданной почты
     mail_validation = mail_checker(email)
 
@@ -80,7 +80,7 @@ async def login_user(email: str, password: str):
 
 # Изменение данных о пользователе
 @app.put('/api/change-profile')
-async def change_user_profile(user_id: int, change_info: str, new_data: str):
+async def change_user_profile(user_id: int = Body(), change_info: str = Body(), new_data: str = Body()):
     data = change_user_data(user_id, change_info, new_data)
 
     return {'status': 1, 'message': data}

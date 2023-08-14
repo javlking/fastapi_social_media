@@ -1,12 +1,14 @@
 from main import app
 from fastapi import Request, Body, UploadFile
-from database.photoservice import change_photo_db
+from database.photoservice import change_photo_db, get_all_or_exact_photo_db, delete_photo_db
 
 
 # получить все фотографии
 @app.get('/api/photo')
 async def get_all_or_exact_photo(photo_id: int = 0, user_id: int = 0):
-    pass
+    photo = get_all_or_exact_photo_db(photo_id, user_id)
+
+    return {'status': 1, 'message': photo}
 
 
 # Изменить фото профиля
@@ -26,8 +28,10 @@ async def change_user_photo(photo_id: int = Body(...),
 
 # Удалить определенную фотографию
 @app.delete('/api/photo')
-async def delete_user_photo():
-    pass
+async def delete_user_photo(photo_id: int = Body()):
+    result = delete_photo_db(photo_id=photo_id)
+
+    return {'status': 1, 'message': result}
 
 
 

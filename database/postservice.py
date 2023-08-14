@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from database.models import Comment, UserPost, Hashtag, PostPhoto
 from database import get_db
 
@@ -69,7 +71,7 @@ def get_exact_post_comments_db(post_id):
 
 
 # функция публикации комментария function(post_id, user_id, text, reg_date)
-def public_comment_db(post_id, user_id, text, reg_date):
+def public_comment_db(post_id, user_id, text, reg_date=datetime.now()):
     db = next(get_db())
 
     new_comment = Comment(post_id=post_id, user_id=user_id,
