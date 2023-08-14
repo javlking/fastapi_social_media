@@ -1,5 +1,7 @@
 FROM python:latest
 
+WORKDIR /social_media
+
 COPY . /social_media
 
 RUN pip install -r requirements.txt
