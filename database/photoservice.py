@@ -54,8 +54,15 @@ def delete_photo_db(photo_id):
     return "Фото не найдено"
 
 
+def add_photo_db(post_id, photo_path):
+    db = next(get_db())
 
+    new_photo = PostPhoto(post_id=post_id, photo_path=photo_path)
 
+    db.add(new_photo)
+    db.commit()
+
+    return new_photo.id
 
 
 

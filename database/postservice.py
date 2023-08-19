@@ -17,6 +17,16 @@ def get_all_or_exact_post_db(post_id):
     return db.query(UserPost).filter_by(id=post_id).first()
 
 
+def add_post_db(main_text, user_id):
+    db = next(get_db())
+
+    new_post = UserPost(main_text=main_text, user_id=user_id, reg_date=datetime.now())
+
+    db.add(new_post)
+    db.commit()
+
+    return new_post.id
+
 # функция изменения текста к посту function(post_id, new_text)
 def change_comment_text_db(post_id, new_text):
     db = next(get_db())

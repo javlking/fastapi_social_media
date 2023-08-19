@@ -22,6 +22,9 @@ def mail_checker(email):
     return False
 
 
+# JWT authentication
+
+
 # модель пользователя
 class User(BaseModel):
     name: str
