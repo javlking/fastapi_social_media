@@ -64,10 +64,12 @@ def profile_info_db(user_id):
 
     # если нашел пользователя, передаю всю информацию про него
     if exact_user:
-        return exact_user.email, \
-            exact_user.phone_number, \
-            exact_user.id, exact_user.name, \
-            exact_user.reg_date, exact_user.user_city
+        return {'mail': exact_user.email,
+                'phone_number': exact_user.phone_number,
+                'user_id': exact_user.id,
+                'name': exact_user.name,
+                'reg_date': exact_user.reg_date,
+                'city': exact_user.user_city}
 
     return "Пользователь не найден"
 
@@ -104,6 +106,5 @@ def change_user_data(user_id, change_info, new_data):
 
     # а если не находим в базе пользователя
     return "Пользователь не найден"
-
 
 # Сброс пароля
