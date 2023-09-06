@@ -14,9 +14,10 @@ async def get_all_or_exact_post(post_id: int = 0):
 
 
 @app.post('/api/post')
-async def new_post(user_id: int = Body(),
+async def new_post(photo_file: UploadFile = None,
+                   user_id: int = Body(),
                    main_text: str = Body(),
-                   photo_file: UploadFile = Body(...)):
+                   ):
     post_id = add_post_db(main_text=main_text, user_id=user_id)
 
     if photo_file:
