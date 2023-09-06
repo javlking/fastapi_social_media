@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+from starlette.middleware.cors import CORSMiddleware
 from starlette.staticfiles import StaticFiles
 
 from database import Base, engine
@@ -13,6 +14,15 @@ from api.users_api import users
 Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
+origins = ["*"]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 app.mount('/api/photo_api/photos', StaticFiles(directory='./api/photo_api/photos'), name='images')
 
 app.include_router(users.app, tags=['user'])
