@@ -37,7 +37,7 @@ async def delete_user_photo(photo_id: int = Body()):
 # Загрузить изображение
 @app.post('/api/add-photo')
 async def add_user_photo(post_id: int = Body(...),
-                        photo_file: UploadFile = Body(...)):
+                        photo_file: UploadFile = None):
     if photo_file:
         photo_id = add_photo_db(post_id, photo_path=photo_file)
         # сохранить фото в папку
