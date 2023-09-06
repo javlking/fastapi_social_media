@@ -8,7 +8,7 @@ def get_all_or_exact_photo_db(photo_id, user_id):
 
     # Если нужны все фотографии определенного пользователя
     if user_id:
-        exact_user_photos = db.query(PostPhoto).filter_by(user_id=user_id).all()
+        exact_user_photos = db.query(PostPhoto).filter_by(id=photo_id).all()
 
         return {'status': 1, 'message': exact_user_photos}
 
