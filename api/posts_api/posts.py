@@ -1,8 +1,10 @@
-from fastapi import Body, UploadFile
+from fastapi import Body, UploadFile, APIRouter
 
-from api import app
 from database.photoservice import change_photo_db, add_photo_db
 from database.postservice import delete_exact_post_db, get_all_or_exact_post_db, add_post_db
+
+
+app = APIRouter()
 
 
 # получить все посты
@@ -23,7 +25,7 @@ async def new_post(photo_file: UploadFile = None,
     if photo_file:
         photo_id = add_photo_db(post_id, photo_path=photo_file.filename)
         # сохранить фото в папку
-        with open(f'{photo_id}.jpg', 'wb') as photo:
+        with open(f'api/photo_api/photos/{photo_id}.jpg', 'wb') as photo:
             photo_to_save = await photo_file.read()
             photo.write(photo_to_save)
 

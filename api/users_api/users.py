@@ -1,4 +1,4 @@
-from fastapi import Request, Body
+from fastapi import Request, Body, APIRouter
 
 from pydantic import BaseModel
 from typing import List, Dict
@@ -8,12 +8,11 @@ from database.userservice import register_user_db, \
     check_user_password_db, \
     change_user_data, profile_info_db
 
-from api import app
-
 # проверка почты
 import re
 
 regex = re.compile(r'([A-Za-z0-9]+[.-_])*[A-Za-z0-9]+@[A-Za-z0-9-]+(\.[A-Z|a-z]{2,})+')
+app = APIRouter()
 
 
 def mail_checker(email):

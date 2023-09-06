@@ -1,7 +1,8 @@
-from main import app
-from fastapi import Request, Body, UploadFile
+from fastapi import Request, Body, UploadFile, APIRouter
 from database.photoservice import change_photo_db, get_all_or_exact_photo_db, delete_photo_db, add_photo_db
 
+
+app = APIRouter()
 
 # получить все фотографии
 @app.get('/api/photo')

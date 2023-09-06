@@ -1,8 +1,9 @@
-from api import app
-from fastapi import Request, Body
+from fastapi import Request, Body, APIRouter
 
 from database.postservice import get_exact_post_comments_db, \
     public_comment_db, change_exact_comment_db, delete_exact_comment_db
+
+app = APIRouter()
 
 
 # Получить комментарии определенного поста
