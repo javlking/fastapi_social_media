@@ -21,7 +21,7 @@ async def new_post(photo_file: UploadFile = None,
     post_id = add_post_db(main_text=main_text, user_id=user_id)
 
     if photo_file:
-        photo_id = add_photo_db(post_id, photo_path=photo_file)
+        photo_id = add_photo_db(post_id, photo_path=photo_file.filename)
         # сохранить фото в папку
         with open(f'{photo_id}.jpg', 'wb') as photo:
             photo_to_save = await photo_file.read()
