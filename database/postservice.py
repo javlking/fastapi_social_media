@@ -17,6 +17,19 @@ def get_all_or_exact_post_db(post_id):
     return db.query(UserPost).filter_by(id=post_id).first()
 
 
+def chang_user_post_db(post_id, new_text):
+    db = next(get_db())
+    exact_post = db.query(UserPost).filter_by(id=post_id).first()
+
+    # проверка
+    if exact_post:
+        exact_post.main_text = new_text
+        db.commit()
+        return "Изменен"
+
+    return False
+
+
 def add_post_db(main_text, user_id):
     db = next(get_db())
 

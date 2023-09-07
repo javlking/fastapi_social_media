@@ -1,8 +1,7 @@
 from fastapi import Body, UploadFile, APIRouter
 
 from database.photoservice import change_photo_db, add_photo_db
-from database.postservice import delete_exact_post_db, get_all_or_exact_post_db, add_post_db
-
+from database.postservice import delete_exact_post_db, get_all_or_exact_post_db, add_post_db, chang_user_post_db
 
 app = APIRouter()
 
@@ -36,8 +35,15 @@ async def new_post(photo_file: UploadFile = None,
 
 # Изменить пост
 @app.put('/api/post')
-async def change_user_post():
-    pass
+async def change_user_post(post_id: int = Body(),
+                           new_text: int = Body()):
+
+    checker = chang_user_post_db(post_id, new_text)
+
+    if checker:
+        return {'status': 1, 'message': checker}
+    else:
+        return {'status': 0, 'message': checker}
 
 
 # Удалить определенный пост
