@@ -8,7 +8,7 @@ app = APIRouter()
 
 # Получить комментарии определенного поста
 @app.get('/api/comment')
-async def get_exact_post_comments(post_id: int = Body()):
+async def get_exact_post_comments(post_id: int):
     # Получить JSON со всеми данными которые пришли из front
     # data = await request.json() # {'post_id': 12}
 
