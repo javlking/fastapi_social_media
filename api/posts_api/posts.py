@@ -36,7 +36,7 @@ async def new_post(photo_file: UploadFile = None,
 # Изменить пост
 @app.put('/api/post')
 async def change_user_post(post_id: int = Body(),
-                           new_text: int = Body()):
+                           new_text: str = Body()):
 
     checker = chang_user_post_db(post_id, new_text)
 
