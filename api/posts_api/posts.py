@@ -15,20 +15,11 @@ async def get_all_or_exact_post(post_id: int = 0):
 
 
 @app.post('/api/post')
-async def new_post(photo_file: UploadFile = None,
+async def new_post(
                    user_id: int = Body(),
                    main_text: str = Body(),
                    ):
     post_id = add_post_db(main_text=main_text, user_id=user_id)
-
-    if photo_file:
-        photo_id = add_photo_db(post_id, photo_path=photo_file.filename)
-        # сохранить фото в папку
-        with open(f'api/photo_api/photos/{photo_id}.jpg', 'wb') as photo:
-            photo_to_save = await photo_file.read()
-            photo.write(photo_to_save)
-
-        change_photo_db(photo_id, f'/api/photo_api/photos/{photo_id}.jpg')
 
     return {'status': 1, 'post_id': post_id}
 

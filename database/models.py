@@ -27,6 +27,7 @@ class UserPost(Base):
     reg_date = Column(DateTime)
 
     user_fk = relationship(User, lazy='subquery')
+    photo_fk = relationship('PostPhoto', overlaps="post_fk")
 
 
 # таблица фотографий

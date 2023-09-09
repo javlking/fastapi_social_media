@@ -12,9 +12,28 @@ def get_all_or_exact_post_db(post_id):
 
     # проверка
     if post_id == 0:
-        return db.query(UserPost).all()
+        all_posts = db.query(UserPost).all()
 
-    return db.query(UserPost).filter_by(id=post_id).first()
+        return [{
+                  "main_text": i.main_text,
+                  "user_id": i.user_id,
+                  "id": i.id,
+                  "reg_date": i.reg_date,
+                  "user_fk": i.user_fk,
+                  "photos": [{'photo_id': b.id,
+                              'photo_url': b.photo_path} for b in i.photo_fk]
+                } for i in all_posts]
+
+    exact_post = db.query(UserPost).filter_by(id=post_id).first()
+    return {
+          "main_text": exact_post.main_text,
+          "user_id": exact_post.user_id,
+          "id": exact_post.id,
+          "reg_date": exact_post.reg_date,
+          "user_fk": exact_post.user_fk,
+          "photos": [{'photo_id': b.id,
+                      'photo_url': b.photo_path} for b in exact_post.photo_fk]
+                }
 
 
 def chang_user_post_db(post_id, new_text):
