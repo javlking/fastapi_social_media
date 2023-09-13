@@ -42,7 +42,7 @@ async def add_user_photo(post_id: int = Body(...),
     if photo_file:
         photo_id = add_photo_db(post_id, photo_path=photo_file.filename)
         # сохранить фото в папку
-        with open(f'{photo_id}.jpg', 'wb') as photo:
+        with open(f'./api/photo_api/photos/{photo_id}.jpg', 'wb') as photo:
             photo_to_save = await photo_file.read()
             photo.write(photo_to_save)
 
