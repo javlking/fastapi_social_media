@@ -28,6 +28,7 @@ class UserPost(Base):
 
     user_fk = relationship(User, lazy='subquery')
     photo_fk = relationship('PostPhoto', overlaps="post_fk")
+    comment_fk = relationship('Comment', overlaps="post_fk")
 
 
 # таблица фотографий
