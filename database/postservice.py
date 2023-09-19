@@ -21,7 +21,7 @@ def get_all_or_exact_post_db(post_id):
                   "reg_date": i.reg_date,
                   "user_fk": i.user_fk,
                   "photos": [{'photo_id': b.id,
-                              'photo_url': b.photo_path} for b in i.photo_fk]
+                              'photo_url': b.photo_path} for b in i.photo_fk],
                   "comments": [comment.text for comment in i.comment_fk]
                 } for i in all_posts]
 
