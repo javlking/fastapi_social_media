@@ -59,6 +59,8 @@ def check_user_password_db(email, password):
 def profile_info_db(user_id):
     db = next(get_db())
 
+    if user_id == 0:
+        return 'Не найден'
     # находим пользователя через id
     exact_user = db.query(User).filter_by(id=user_id).first()
 
