@@ -8,7 +8,7 @@ app = APIRouter()
 
 # получить все посты
 @app.get('/api/post')
-async def get_all_or_exact_post(post_id: int = 0):
+async def get_all_or_exact_post(post_id: int = None):
     try:
         result = get_all_or_exact_post_db(post_id)
         return {'status': 1, 'message': result}

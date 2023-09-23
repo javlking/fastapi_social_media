@@ -11,7 +11,7 @@ def get_all_or_exact_post_db(post_id):
     db = next(get_db())
 
     # проверка
-    if post_id == 0:
+    if not post_id:
         all_posts = db.query(UserPost).all()
 
         return [{
