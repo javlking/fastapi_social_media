@@ -8,8 +8,8 @@ async def test_connection(url):
 
 
 async def main():
-    num_con = 100
-    url = 'http://161.35.153.209:5430/api/post?post_id=0'
+    num_con = 15
+    url = 'http://161.35.153.209:5430/api/post'
     tasks = [test_connection(url) for i in range(num_con)]
     await asyncio.gather(*tasks)
 
