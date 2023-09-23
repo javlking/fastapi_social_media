@@ -16,7 +16,6 @@ def register_user_db(name, email, phone_number, password, user_city):
     db.add(new_user)
     # Сохраним в базе
     db.commit()
-    db.close()
 
     return new_user.id
 
@@ -27,7 +26,7 @@ def check_user_data_db(phone_number, email):
 
     # Проверка данных на наличие записи в базе
     checker = db.query(User).filter_by(phone_number=phone_number, email=email).first()
-    db.close()
+
     # если есть совпадения
     if checker:
         return False
@@ -42,7 +41,7 @@ def check_user_password_db(email, password):
 
     # Попробуем найти пользователя
     checker = db.query(User).filter_by(email=email).first()
-    db.close()
+
     # Если нашел такой мейл, проверяем правильность пароля
     if checker:
         # Начинаем сверку пароля
@@ -62,7 +61,6 @@ def profile_info_db(user_id):
 
     # находим пользователя через id
     exact_user = db.query(User).filter_by(id=user_id).first()
-    db.close()
 
     # если нашел пользователя, передаю всю информацию про него
     if exact_user:
@@ -82,7 +80,6 @@ def change_user_data(user_id, change_info, new_data):
 
     # Находим пользователя в базе
     exact_user = db.query(User).filter_by(id=user_id).first()
-
 
     # Если есть пользователь в базе
     if exact_user:
@@ -104,7 +101,6 @@ def change_user_data(user_id, change_info, new_data):
 
         # Сохраняем изменения в базе
         db.commit()
-        db.close()
 
         return "Данные успешно изменены"
 

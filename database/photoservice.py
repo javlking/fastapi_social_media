@@ -15,13 +15,11 @@ def get_all_or_exact_photo_db(photo_id):
     # Если нужна определенная фотография
     if photo_id:
         exact_photo = db.query(PostPhoto).filter_by(id=photo_id).first()
-        db.close()
 
         return {'status': 1, 'message': exact_photo}
 
     else:
         all_photos = db.query(PostPhoto).all()
-        db.close()
 
         return {'status': 1, 'message': all_photos}
 
@@ -35,7 +33,6 @@ def change_photo_db(photo_id, new_photo_path):
     if exact_photo:
         exact_photo.photo_path = new_photo_path
         db.commit()
-        db.close()
 
         return True
 
@@ -51,8 +48,6 @@ def delete_photo_db(photo_id):
     if exact_photo:
         db.delete(exact_photo)
         db.commit()
-        db.close()
-
 
         return "фото удалено"
 
@@ -66,7 +61,6 @@ def add_photo_db(post_id, photo_path):
 
     db.add(new_photo)
     db.commit()
-    db.close()
 
     return new_photo.id
 
